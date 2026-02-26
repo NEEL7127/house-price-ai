@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>House Price Prediction AI</h1>
+
+    <p class="accuracy">Model Accuracy: {{ accuracy }}%</p>
+
+    <form action="/predict" method="post">
+        <input type="number" name="area" placeholder="Area (sq ft)" step="any" min="0" required>
+        <input type="number" name="age" placeholder="House Age" min="0" step="1" required>
+        <input type="number" name="location_score" placeholder="Location Score (1-10)" min="1" max="10" step="1" required>
+        <input type="number" name="GrLivArea" placeholder="Living Area (sq ft)" required>
+        <input type="number" name="BedroomAbvGr" placeholder="Bedrooms" required>
+        <input type="number" name="FullBath" placeholder="Full Bathrooms" required>
+        <input type="number" name="LotArea" placeholder="Lot Area" required>
+        <input type="number" name="YearBuilt" placeholder="Year Built" required>
+
+        <button type="submit">Predict Price</button>
+    </form>
+
+    {% if prediction is not none %}
+        <div class="result">
+            Predicted Price: Rs {{ prediction }}
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
